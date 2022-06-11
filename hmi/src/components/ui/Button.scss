@@ -1,0 +1,11 @@
+@import "../../styles/colors";
+@import "../../styles/base";
+
+.button {
+  display: inline-block;
+  background: $button-bg-color;
+  color: $button-fg-color;
+  padding: 5px 16px;
+  font-size: 110%;
+  border-radius: 6px;
+}

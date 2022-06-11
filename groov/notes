@@ -1,0 +1,12 @@
+Influx line format - taken from starlark loader
+
+  Metric("C", 
+  tags={
+    "Component": "Outdoor", 
+    "Device": "K", 
+    "EdgeID": "riolc", 
+    "Experiment": "Exp1000", 
+    "Metric": "I_Outdoor_K_FrontDoor_C", 
+    "Position": "FrontDoor", 
+    "Reactor": "SF"}, 
+  fields={"value": 4.406708}, time=1652020344984999936)

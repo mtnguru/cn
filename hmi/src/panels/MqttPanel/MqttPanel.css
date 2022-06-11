@@ -1,0 +1,36 @@
+
+.mqtt-panel header {
+  width: 100%;
+}
+
+.mqtt-panel .content {
+  display: flex;
+  width: 100%;
+}
+
+.mqtt-filter {
+  display: inline;
+  width: 150px;
+  margin-right: 20px;
+}
+
+.mqtt-filter-select {
+
+  padding: 10px;
+  background: #1da086;
+  min-height: 200px;
+}
+
+.mqtt-display {
+  display: inline;
+  width: calc(100% - 150px);
+}
+
+.mqtt-display textarea {
+  color: #001b54;
+  overflow-y: visible;
+  white-space: nowrap;
+  background: #00C0E0;
+  width: 100%;
+  min-height: 200px;
+}

@@ -1,0 +1,20 @@
+@import "../../styles/base";
+@import "../../styles/colors";
+
+.control-stats {
+  border: 1px white solid;
+  width: 300px;
+  margin: 10px;
+  padding: 5px;
+  border-radius: 6px;
+  text-align: center;
+  h3 {
+    margin: 10px 0;
+  }
+  .stat {
+    font-weight: bold;
+    font-size: 300%;
+    color: #ccff33;
+    margin: 10px 0;
+  }
+}

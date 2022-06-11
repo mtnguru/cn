@@ -1,0 +1,64 @@
+import React, {useState, useEffect} from 'react';
+import influx from "../../utils/influx"
+
+import Card from '../../components/ui/Card'
+import ('./MqttItem.scss')
+
+const MqttItem = (props) => {
+  const [payloadOut, setPayloadOut] = useState(props.item.payload)
+
+  // Format the payload - Raw, JSON, Pretty
+  useEffect(() => {
+//  console.log('MqttItem useEffect ', props.item.payload)
+    let payloadStr
+
+    if (props.pretty === "Raw") {
+      payloadStr = props.item.payload         // Display the Raw payload
+    } else {
+      if (props.item.payload[0] === '{') {    // if this payload is JSON
+        const payload = JSON.parse(props.item.payload);
+        payloadStr = JSON.stringify(payload, null, 3)
+        if (props.pretty === "Pretty") {
+          if (payload.content) {
+            payloadStr = `${payload.function} - ${payload.content}`
+          } else if (props.item.type === 'output') {
+            payloadStr = `${payload.metric} - ${payload.value}`
+          } else {
+            payloadStr = payloadStr
+              .replace(/"|/g, '')         // remove all double quotes
+
+              .replace(/^{\n/, '')        // remove the opening {
+              .replace(/}$/, '')         // remove the closing }
+
+              .replace(/,\n/g, '\n')      // remove all trailing commas
+              .replace(/\n\s*}\n/g, '\n') // remove all } on a line by themselves
+              .replace(/\n\s*}\n/g, '\n') // do it a second time
+              .replace(/: {\n/g, ':\n');  // remove all trailing {
+          }
+        }
+      } else if (props.item.type === 'input' || props.item.type === 'user' || props.item.type === 'output') {
+        let {tags, values} = influx.extract(props.item.payload)
+        payloadStr = `${tags["Metric"]} -- ${values["value"]}`
+      }
+    }
+    setPayloadOut(payloadStr)
+  }, [props.item.type, props.item.payload, props.pretty])
+
+  return (
+    <div className='mqtt-item mqtt-type-bg'>
+      <Card type={props.item.type} className={props.pretty}>
+        <div className='right'>
+          <span className='date'>{props.item.date}</span>
+          <span className='nitems'>{props.item.nitems.toString()}</span>
+        </div>
+        <div className={`left mqtt-client-bg`}>
+          <span className={`source ${props.item.source}`}>{props.item.source}</span>
+          <span className='topic'>{props.item.topic}</span>
+        </div>
+        <pre><code className='payload'>{payloadOut}</code></pre>
+      </Card>
+    </div>
+  )
+}
+
+export default MqttItem

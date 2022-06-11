@@ -1,0 +1,10 @@
+@import "../../styles/colors";
+@import "../../styles/base";
+
+.mqtt-filter-client {
+  display: inline;
+  .select {
+    padding: 10px;
+    background: $bg1-color;
+  }
+}

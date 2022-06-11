@@ -1,0 +1,51 @@
+
+HMI Page Contents - react project #1
+=======================
+
+MQTT analyzer - Filter by Topics - color coded - subscribe to all activity
+  lab/chat               Chat with each other - recorded for posterity
+  lab/labbook            Record observations about the experiment
+  lab/alarms             Recipe conditions were out of spec  
+  lab/inputs/$IP         Edge Sensors/Channels - temperature, voltage, counter
+  lab/outputs/$IP        Edge outputs - turn on LED, move motor, voltage
+  lab/outputsRest/$IP    If device cannot fulfill output request - why?
+  lab/user               Button, Slider, Text - physical devices or computer interface
+  lab/configReq/$IP      Request configuration for an application or device - recipes - procedures
+  lab/config/$IP         Return requested configuration information
+  lab/admin              Reset device, status,
+  lab/errors             Fatal program errors
+  lab/warnings           Non-fatal program errors
+  lab/debug              Debug messages for tracing program flow
+
+Input widgets
+  Buttons to turn on lights
+  Slider to set LED light intensity 
+  Slider to set blink rate 
+  Arduino Reset 
+
+Output widgets             
+  LEDs on EPIC backpanel - Arduino builtin
+  Gauge to show setting positions
+  Multi-line graph of sensors - real time updates
+
+Device page
+=======================
+List all devices
+  Show status
+  Show IP
+  Show inputs
+  Show outputs
+  Reset button
+
+Recipe page
+=======================
+Current status
+Show all steps pf the recipe
+Show the step we are currently on
+Allow user to select the next step
+If step cannot be selected show why
+
+List DOE variants
+=======================
+   Each independent variable shows desired and current value - color coded
+   User can select when operating conditions are met - this sets a timestamp in historian

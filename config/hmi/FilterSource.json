@@ -1,0 +1,29 @@
+{ 
+  "all": {
+    "label": "Select All"
+  },
+  "server": {
+    "label": "Alarms"
+  },
+  "controller": {
+    "label": "Notes"
+  },
+  "hmi1": {
+    "label": "Status"
+  },
+  "arduino2": {
+    "label": "Arduino"
+  },
+  "arduino3": {
+    "label": "Arduino3"
+  },
+  "epiclc": {
+    "label": "Epiclc"
+  },
+  "riolc": {
+    "label": "Riolc"
+  },
+  "mosq_sim": {
+    "label": "Mosq Publish"
+  }
+}

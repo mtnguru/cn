@@ -1,0 +1,7 @@
+@import "../../styles/base";
+@import "../../styles/colors";
+
+.hmi-panel {
+  @include clearfix;
+  width: 100%
+}

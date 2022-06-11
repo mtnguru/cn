@@ -1,0 +1,35 @@
+$bg-color: #111133;
+$bg1-color: #332266;
+$fg-color: #f0fff0;
+$button-fg-color: #ffffff;
+$button-bg-color: #5500cc;
+
+.mqtt-type-bg {
+  // MQTT Message type
+  .Chat, .chat        { background-color: #40b}
+  .Errors, .error     { background-color: #d0a; }
+  .Warnings, .warning { background-color: #d80; }
+  .Alarms, .alarm     { background-color: #a00; }
+  .Inputs, .input     { background-color: #05d; }
+  .Outputs, .output   { background-color: #070; }
+  .Debug, .debug      { background-color: #333; }
+  .User, .user        { background-color: #db0 }
+  .Config, .config    { background-color: #777; }
+  .Admin, .admin      { background-color: #630; }
+  .Notes, .note       { background-color: #028; }
+  .DOE, .doe          { background-color: #a1f; }
+  .Status, .status    { background-color: #0aa; }
+  .Notify, .notify    { background-color: #030; }
+}
+
+.mqtt-client-bg {
+  // MQTT message source
+  .riolc      { background-color: #02a; }
+  .epiclc     { background-color: #089 }
+  .arduino2   { background-color: #a04; }
+  .arduino3   { background-color: #d70; }
+  .hmi1       { background-color: #0a0; }
+  .controller { background-color: #a0d; }
+  .server     { background-color: #640; }
+  .mqtt_sim   { background-color: #666; }
+}

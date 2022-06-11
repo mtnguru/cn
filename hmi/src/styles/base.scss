@@ -1,0 +1,12 @@
+
+//$bg-color: #221133;
+//$bg1-color: #332266;
+//$fg: #f0f0ff;
+
+@mixin clearfix {
+  &::after {
+    clear: both;
+    content: "";
+    display: table;
+  }
+}

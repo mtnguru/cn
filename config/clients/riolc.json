@@ -1,0 +1,31 @@
+{
+  "name": "riolc",
+  "model": "rio",
+  "sampleInterval": 1000,
+  "telegraf": "cabin_cn",
+  "subscribeTopics": {
+    "output": "PROJECT/output/control/MY_CLIENT_NAME",
+    "config": "PROJECT/config/post/MY_IP",
+    "admin":  "PROJECT/admin/post/MY_CLIENT_NAME"
+  },
+  "headers": {
+    "apiKey": "yedg7SAJWgtf3jZNjPYfR5XTjWRrX59X",
+    "Content-Type": "application/json; charset utf-8;",
+    "_rejectUnauthorized": false
+  },
+  "inputs": {
+    "I_Cabin_K_Fireplace_C": {
+      "module": "0",
+      "channel": "1",
+      "type": "analog",
+      "desc": "K thermocouple - bedroom"
+    },
+    "I_Cabin_K_Outside_C": {
+      "module": "0",
+      "channel": "2",
+      "type": "analog",
+      "desc": "K thermocouple - outside"
+    }
+  },
+  "outputs": { }
+}

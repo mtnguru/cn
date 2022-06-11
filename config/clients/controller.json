@@ -1,0 +1,23 @@
+{
+  "name": "controller",
+  "project": "lab1",
+  "mqtt": {
+    "url": "mqtt://merlin:1883",
+    "username": "data",
+    "password": "datawp",
+    "connectTimeout": 4000,
+    "reconnectPeriod": 10000
+  },
+  "subscribeTopics": {
+    "recipe": "PROJECT/config/recipe/#",
+    "config": "PROJECT/config/#"
+  },
+  "clients": {
+    "controller": "172.16.45.7",
+    "hmi1":       "172.16.45.7",
+    "epiclc":     "172.16.45.3",
+    "riolc":      "172.16.45.4",
+    "arduino2":   "172.16.45.32",
+    "arduino3":   "172.16.45.33"
+  }
+}

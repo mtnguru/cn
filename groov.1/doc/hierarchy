@@ -1,0 +1,15 @@
+
+
+mqtt_cn.init
+  connect to mqtt server
+  subscribe to incoming messages;
+
+readSensor
+groov.js
+  loop indefinitely
+    readInputs
+      for each sensor
+  end loop
+       
+  process
+     mqtt_cn.subscribe

@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="VcsDirectoryMappings">
+    <mapping directory="$PROJECT_DIR$/arduino/sketches/hardware/esp8266com/esp8266" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/arduino/sketches/hardware/esp8266com/esp8266/libraries/ESP8266SdFat" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/arduino/sketches/hardware/esp8266com/esp8266/libraries/Ethernet" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/arduino/sketches/hardware/esp8266com/esp8266/libraries/LittleFS/lib/littlefs" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/arduino/sketches/hardware/esp8266com/esp8266/libraries/SoftwareSerial" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/arduino/sketches/hardware/esp8266com/esp8266/tools/esptool" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/arduino/sketches/hardware/esp8266com/esp8266/tools/pyserial" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/arduino/sketches/hardware/esp8266com/esp8266/tools/sdk/lwip2/builder" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/arduino/sketches/hardware/esp8266com/esp8266/tools/sdk/ssl/bearssl" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/arduino/sketches/hardware/esp8266com/esp8266/tools/sdk/uzlib" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/react/first" vcs="Git" />
+  </component>
+</project>

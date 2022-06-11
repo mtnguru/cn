@@ -1,0 +1,29 @@
+Display lists of messages
+   Messages are all time-stamped - can be loaded into Influx or prometheus and analyzed - what does that mean?
+    - Chat
+    - Alarms 
+    - Error messages
+    - Notifications
+    - MQTT messages
+
+
+
+
+ErrorMsgs
+NotificationMsgs
+MQTT Messages
+Alarm Messages
+
+Each message window can be
+   - minimized
+   - cleared
+   - stop updates
+
+Buttons
+   - Turn on/off back lights on EPIC
+   - Turn on/off builtin LED on arduino
+   - Rest arduino
+
+List devices
+
+MQTT Client

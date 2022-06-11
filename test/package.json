@@ -1,0 +1,19 @@
+{
+  "name": "src",
+  "version": "1.0.0",
+  "description": "",
+  "main": "test.js",
+  "dependencies": {
+    "axios": "^0.27.2",
+    "mqtt": "^4.3.7",
+    "nodemon": "^2.0.15",
+    "sprintf-js": "^1.1.2",
+    "timestamp-nano": "^1.0.0"
+  },
+  "scripts": {
+    "start": "nodemon test.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC"
+}

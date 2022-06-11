@@ -1,0 +1,43 @@
+{
+  "clientName": "hmi1",
+  "ip": "172.16.45.7",
+  "project": "lab1",
+  "subscribeTopics": {
+    "all": "PROJECT/#",
+    "config": "PROJECT/config/mqtt/MY_CLIENT_NAME"
+  },
+  "displayActions": {
+    "freeze": {
+      "label": "Freeze",
+      "type": "button",
+      "function": "abc"
+    },
+    "clear": {
+      "label": "Clear Display",
+      "type": "button",
+      "function": "yjq"
+    }
+  },
+  "filterClients": {
+    "arduino2": "Arduino2",
+    "arduino3": "Arduino2",
+    "epiclc": "Epiclc",
+    "riolc": "Riolc",
+    "hmi1": "HMI - 1",
+    "server": "Server",
+    "controller": "Controller"
+  },
+  "filterMsgTypes": {
+    "chat": "Chat",
+    "labbook": "Lab Book",
+    "alarms": "Alarms",
+    "inputs": "Inputs",
+    "outputs": "Outputs",
+    "user": "User",
+    "config": "Config",
+    "admin": "Admin",
+    "errors": "Errors",
+    "warnings": "Warnings",
+    "debug": "Debug"
+  }
+}

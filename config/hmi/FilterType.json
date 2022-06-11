@@ -1,0 +1,41 @@
+{ 
+  "all": {
+    "label": "Select All"
+  },
+  "alarms": {
+    "label": "Alarms"
+  },
+  "notes": {
+    "label": "Notes"
+  },
+  "status": {
+    "label": "Status"
+  },
+  "doe": {
+    "label": "DOE"
+  },
+  "inputs": {
+    "label": "Inputs"
+  },
+  "outputs": {
+    "label": "Outputs"
+  },
+  "chat": {
+    "label": "Chat"
+  },
+  "user": {
+    "label": "User"
+  },
+  "config": {
+    "label": "Config"
+  },
+  "errors": {
+    "label": "Errors"
+  },
+  "warnings": {
+    "label": "Warnings"
+  },
+  "debug": {
+    "label": "Debug"
+  }
+}

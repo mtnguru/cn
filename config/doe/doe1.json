@@ -1,0 +1,36 @@
+{
+  "name": "doe1",
+  "desc": "Optimize the operating point",
+  "variants": {
+    "v1": {
+      "pressure": 1.5,
+      "voltage":  10,
+      "temperature": 100
+    },
+    "v2": {
+      "pressure": 1.0,
+      "voltage":  12,
+      "temperature": 120
+    },
+    "v3": {
+      "pressure": 2.5,
+      "voltage":  8,
+      "temperature": 140
+    },
+    "v4": {
+      "pressure": 1.0,
+      "voltage":  10,
+      "temperature": 140
+    },
+    "v5": {
+      "pressure": 1.5,
+      "voltage":  8,
+      "temperature": 120
+    },
+    "v6": {
+      "pressure": 2.5,
+      "voltage":  12,
+      "temperature": 100
+    }
+  }
+}

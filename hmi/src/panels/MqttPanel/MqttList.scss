@@ -1,0 +1,11 @@
+@import "../../styles/colors";
+@import "../../styles/base";
+
+.mqtt-display {
+  display: inline;
+  width: calc(100% - 150px);
+  .mqtt-list {
+    height: 80vh;
+    overflow-y: auto;
+  }
+}

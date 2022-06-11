@@ -1,0 +1,12 @@
+let g:netrw_dirhistmax  =10
+let g:netrw_dirhistcnt =4
+let g:netrw_dirhist_4='/home/az/drupalg'
+let g:netrw_dirhist_3='/home/az/drupald'
+let g:netrw_dirhist_2='/home/az/drupalg'
+let g:netrw_dirhist_1='/home/az/drupald'
+let g:netrw_dirhist_0='/home/az/drupal.4.1.5'
+let g:netrw_dirhist_9='/home/az/drupal'
+let g:netrw_dirhist_8='/home/az/drupal/docroot/themes/custom/sa_neato/scss/media'
+let g:netrw_dirhist_7='/home/az/drupal/docroot/themes/custom/em_neato/scss'
+let g:netrw_dirhist_6='/home/az/.drush'
+let g:netrw_dirhist_5='/home/az/drupal/docroot/modules/custom/contact_block'

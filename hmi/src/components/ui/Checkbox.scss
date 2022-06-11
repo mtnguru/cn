@@ -1,0 +1,15 @@
+
+.checkbox {
+  &.all {
+    margin-bottom: 10px;
+  }
+  padding: 2px 0;
+  input {
+    margin: 4px 4px;
+  }
+  label {
+    display: inline-block;
+    margin-left: 4px;
+    width: calc(100% - 30px);
+  }
+}

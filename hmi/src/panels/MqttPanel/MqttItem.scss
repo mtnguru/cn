@@ -1,0 +1,71 @@
+.mqtt-item {
+  font-size: 80%;
+  .right {
+    float: right;
+  }
+  .topic {
+    color: #ccc;
+  }
+  .type {
+    font-size: 90%;
+    margin-right: 1rem;
+  }
+  .date {
+    display: inline-block;
+    color: #ff0;
+//  width: 90px;
+    margin-right: 1rem;
+  }
+  .nitems {
+    display: inline-block;
+    width: 30px;
+    font-weight: bold;
+    text-align: right;
+  }
+  .payload {
+    margin-top: 5px;
+  }
+  pre {
+    margin: 4px 0 0;
+  }
+  .source {
+    display: inline-block;
+    width: 80px;
+    margin: 0 8px 0 -6px;
+    padding: 1px 0 2px;
+    text-align: center;
+    border-radius: 4px;
+  }
+  .card {
+    &.Pretty {
+      .nitems {
+        display: none;
+      }
+      .date {
+        margin-right: 0;
+      }
+      pre {
+        margin-top: 0;
+        float: left;
+      }
+      .left {
+        .topic {
+          display: none;
+        }
+        float: left;
+      }
+      &.config {
+        .left,
+        pre {
+          float: none;
+        }
+      }
+    }
+    &.JSON {
+
+    }
+    &.Raw {
+
+    }
+  }
+}

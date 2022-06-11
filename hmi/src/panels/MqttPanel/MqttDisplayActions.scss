@@ -1,0 +1,17 @@
+@import "../../styles/colors";
+@import "../../styles/base";
+
+.mqtt-display-actions {
+  display: inline-block;
+  margin-bottom: 1rem;
+  width: 100%;
+  .buttons {
+    float: right;
+    .button {
+      margin-left: 20px;
+    }
+    .button {
+      width: 120px;
+    }
+  }
+}

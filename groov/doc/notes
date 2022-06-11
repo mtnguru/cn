@@ -1,0 +1,13 @@
+What next?
+
+Create modules
+   edge.js
+      readInputsjs
+         setInterval for every second
+         start an async function for each read
+         async function for each MQTT publish
+      setOutput.js
+
+   groov_api.js
+
+   mqttCn.js
