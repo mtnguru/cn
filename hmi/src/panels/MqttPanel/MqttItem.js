@@ -1,8 +1,7 @@
 import React, {useState, useEffect} from 'react';
 import Card from '../../components/ui/Card'
+import {extractFromTags} from '../../utils/influx'
 import ('./MqttItem.scss')
-
-const extractFromTags = require('../../utils/influx')
 
 const MqttItem = (props) => {
   const [payloadOut, setPayloadOut] = useState('')

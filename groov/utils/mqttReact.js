@@ -1,8 +1,7 @@
 import mqtt from 'precompiled-mqtt';
-//import {extractFromTags} from './influx'
+import {extractFromTags} from './influx'
 import {mgDebug, mgWarning, mgError} from './mg'
 import {findMetric} from './metrics'
-const extractFromTags = require('./influx')
 
 let mqttClient;
 let topicCB = {}

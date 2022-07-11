@@ -65,8 +65,8 @@ const makeTagsFromMetricId = inMetricId => {
 // module.exports.makeTagsFromMetricId = makeTagsFromMetricId
 // module.exports.extractFromTags      = extractFromTags
 
-module.exports = {
-  makeTagsFromMetric: makeTagsFromMetric,
-  makeTagsFromMetricId: makeTagsFromMetricId,
-  extractFromTags: extractFromTags
+export {
+  makeTagsFromMetric,
+  makeTagsFromMetricId,
+  extractFromTags,
 }

@@ -3,8 +3,8 @@ import React, {useState} from 'react';
 
 import {mgDebug} from "../../utils/mg"
 import {mqttPublish} from "../../utils/mqttReact"
-//import {makeTagsFromMetric} from "../../utils/influx"
-const makeTagsFromMetric = require('../../utils/influx')
+import {makeTagsFromMetric} from "../../utils/influx"
+//const makeTagsFromMetric = require('../../utils/influx')
 import {findMetric} from "../../utils/metrics"
 
 import "./ControlButton.scss";

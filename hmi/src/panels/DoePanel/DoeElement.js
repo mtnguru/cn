@@ -39,7 +39,7 @@ const DoeElement = (props) => {
   }
 
   return (
-    <td key={props.metricName} className={`doe-element`} redraw={redraw}>
+    <td key={props.metricName} className={`doe-element`} redraw={redraw.toString()}>
       <span className={"setpoint"}>{props.element.value}</span>
       <span className={"direction"}> </span>
       <span className={`difference ${colorClass}`}>{difference}</span>
