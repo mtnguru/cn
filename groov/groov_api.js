@@ -1,19 +1,19 @@
 /* File: groov_api.js
  * Functions to connect with Groov REST api
  */
-
 require('dotenv').config();
+
+// Temporary - bypass issues with certificates
 process.env['NODE_TLS_REJECT_UNAUTHORIZED'] = '0';
 
+const msg     = require('./utils/msg');
 const https = require ("https");
 const axios = require ("axios");
 const sprintf = require('sprintf-js').sprintf;
 const util = require('util')
+const mqttNode = require('./utils/mqttNode')
 
-require('dotenv').config();
-
-const devices = require (`${process.env.ROOT_PATH}/config/devices.js`);
-var axiosGet = util.promisify(axios.get);
+//var axiosGet = util.promisify(axios.get);
 
 const route = 'manage/api/v1/io/local'
 
@@ -29,19 +29,20 @@ const agent = new https.Agent({
 
 //function writeChannel(url, module, channel, type, value) {
 const writeChannel = async (name, output, body) => {
-  console.log('Enter writeChannel - device: ', output.device)
-  let device = devices[output.device]
-  console.log(`device ${device}`)
+  const f = "groov_api.js::writeChannel"
+  msg(f,DEBUG,'enter')
+  let ip = global.aaa.ip
   let url = sprintf('https://%s/%s/modules/%s/channels/%s/%s/state',
-    device.ip,
+    global.aaa.ip,
     route,
     output['module'],
     output['channel'],
     output['type'])
   console.log('Url: ', url)
+  msg(f,DEBUG,'url: ',url)
 
   try {
-    const res = await axios.put(url, body, { headers: device.headers});
+    const res = await axios.put(url, body, { headers: output.headers});
   } catch (err) {
     console.log(`Error axiosPut: ${err}`)
     console.log( err.response.request )
@@ -49,28 +50,31 @@ const writeChannel = async (name, output, body) => {
 }
 
 //function readChannel(url, module, channel, type) {
-const readChannel = async (name, sensor) => {
-  let device = devices[sensor.device]
-
+const readChannel = async (name, sensor, cb) => {
+  const f = "groov_api.js::readChannel"
+  let client = global.aaa
   // Create the API URL
   let url = sprintf('https://%s/%s/modules/%s/channels/%s/%s/status',
-    device.ip,
+    client.name,
     route,
     sensor['module'],
     sensor['channel'],
     sensor['type'])
 
-  let value = null;
+  let payload;
+  let res;
   try {
-    const res = await axios.get(url,{headers: device.headers});
-    value = JSON.stringify(res.data.value);
+    let metric = global.aaa.metrics[name];
+    if (metric) {
+      res = await axios.get(url,{headers: client.headers});
+      console.log(f,' channel read ', res.data.value)
+      cb(res.data)
+    } else {
+      console.log(f, 'readChannel - ERROR: metric not found.')
+    }
   } catch (err) {
     console.log(`Error: ${err}`)
   }
-
-//console.log('Leave readChannel ', value)
-  return value;
 }
 
 module.exports = { writeChannel, readChannel }
-

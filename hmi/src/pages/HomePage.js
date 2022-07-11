@@ -1,4 +1,21 @@
-function HomePage() {
-  return <h2>Home Page</h2>
+
+import ControlExptPanel from '../panels/ControlPanel/ControlExptPanel.js';
+import MqttPanel from '../panels/MqttPanel/MqttPanel.js';
+import ControlPanel from '../panels/ControlPanel/ControlPanel.js';
+import ControlSliderPanel from '../panels/ControlPanel/ControlSliderPanel.js';
+import DoePanel from '../panels/DoePanel/DoePanel.js';
+// import GrafanaPanel from '../panels/GrafanaPanel/GrafanaPanel.js';
+
+function MqttPage() {
+  return (
+    <div className="mqtt-page">
+      <ControlSliderPanel title='Control Slider Panel'/>
+      <DoePanel title='DOE Panel' />
+      <ControlExptPanel title='Experiment Panel'/>
+      <ControlPanel title='Control Panel'/>
+      <MqttPanel title='MQTT Activity Panel'/>
+    </div>
+  )
 }
-export default HomePage;
+
+export default MqttPage;

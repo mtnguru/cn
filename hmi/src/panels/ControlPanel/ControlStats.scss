@@ -1,20 +1,22 @@
-@import "../../styles/base";
-@import "../../styles/colors";
 
 .control-stats {
   border: 1px white solid;
-  width: 300px;
-  margin: 10px;
+  width: 180px;
+  margin: 8px;
   padding: 5px;
   border-radius: 6px;
   text-align: center;
   h3 {
-    margin: 10px 0;
+    font-size: 100%;
+    margin: 8px 0 4px;
+  }
+  .metric {
+    font-size: 60%;
   }
   .stat {
     font-weight: bold;
-    font-size: 300%;
+    font-size: 175%;
     color: #ccff33;
-    margin: 10px 0;
+    margin: 8px 0 4px;
   }
 }

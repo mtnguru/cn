@@ -3,14 +3,14 @@ WARNING = 1
 DEBUG   = 2
 NOTIFY  = 3
 ADMIN   = 4
-CONFIG  = 5
-ALARM   = 6
-CHAT    = 7
-LABBOOK = 8
-USER    = 9
-INPUT   = 10
-OUTPUT  = 11
-DOE     = 12
+ALARM   = 5
+CHAT    = 6
+NOTES   = 7
+USER    = 8
+INPUT   = 9
+OUTPUT  = 10
+DOE     = 11
+SDEBUG  = 12
 
 msgE = [
   'error',
@@ -18,12 +18,12 @@ msgE = [
   'debug',
   'notify',
   'admin',
-  'config',
   'alarm',
   'chat',
-  'labbook',
+  'notes',
   'user',
   'input',
   'output',
   'doe',
+  'sdebug',
 ]

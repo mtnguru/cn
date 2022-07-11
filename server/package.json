@@ -14,5 +14,8 @@
     "get-current-line": "^6.6.0",
     "mqtt": "^4.3.7",
     "nodemon": "^2.0.16"
+  },
+  "devDependencies": {
+    "fs": "^0.0.1-security"
   }
 }

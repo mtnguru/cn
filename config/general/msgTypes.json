@@ -1,0 +1,67 @@
+{
+ "all": {
+    "name": "Select All",
+    "num": 0,
+    "enabled": true
+  },
+  "alarm": {
+    "name": "Alarm",
+    "num": 6,
+    "enabled": true
+  },
+  "user": {
+    "name": "User",
+    "num": 9,
+    "enabled": true
+  },
+  "input": {
+    "name": "Input",
+    "num": 10,
+    "enabled": true
+  },
+  "output": {
+    "name": "Output",
+    "num": 11,
+    "enabled": true
+  },
+  "doe": {
+    "name": "DOE",
+    "num": 12,
+    "enabled": true
+  },
+  "notes": {
+    "name": "Notes",
+    "num": 8,
+    "enabled": true
+  },
+  "admin": {
+    "name": "Admin",
+    "num": 5,
+    "enabled": true
+  },
+  "notify": {
+    "name": "Notify",
+    "num": 4,
+    "enabled": true
+  },
+  "error": {
+    "name": "Error",
+    "num": 1,
+    "enabled": true
+  },
+  "warning": {
+    "name": "Warning",
+    "num": 2,
+    "enabled": true
+  },
+  "debug": {
+    "name": "Debug",
+    "num": 3,
+    "enabled": true
+  },
+  "sdebug": {
+    "name": "Debug+",
+    "num": 13,
+    "enabled": true
+  }
+}

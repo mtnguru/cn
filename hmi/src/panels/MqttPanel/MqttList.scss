@@ -5,7 +5,8 @@
   display: inline;
   width: calc(100% - 150px);
   .mqtt-list {
-    height: 80vh;
+    height: calc(100vh - 188px);
+    max-height: 700px;
     overflow-y: auto;
   }
 }

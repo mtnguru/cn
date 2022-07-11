@@ -1,5 +1,54 @@
-@import "../../styles/base";
-@import "../../styles/colors";
-
 .control-slider {
+  margin-bottom: 6px;
+  font-size: 100%;
+
+  label {
+    display: inline-block;
+    width: 180px;
+  }
+
+  .value {
+    display: inline-block;
+    text-align: right;
+    width: 36px;
+    margin-left: 1.5rem;
+    background: #54c;
+    padding: 5px;
+    border-radius: 4px;
+  }
+  .outValue {
+    display: inline-block;
+    text-align: right;
+    width: 36px;
+    margin-left: 1rem;
+    background: #54c;
+    padding: 5px;
+    border-radius: 4px;
+  }
+  .container {
+    margin-left: 1rem;
+    display: inline-block;
+    position: relative;
+    font-size: 85%;
+    .left {
+      top: 0;
+      float: left;
+    }
+    .right {
+      float: right;
+
+    }
+    .middle {
+      position: absolute;
+      width: 100%;
+      float: right;
+      text-align: center;
+
+    }
+  }
+
+  input {
+    border: 1px white solid;
+    width: 300px;
+  }
 }

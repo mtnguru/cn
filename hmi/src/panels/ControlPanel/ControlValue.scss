@@ -1,0 +1,22 @@
+
+.control-value {
+  position: absolute;
+  transform: translate(-50%, -50%);
+  border: 1px lightblue solid;
+  margin: .5vw;
+  padding: .3vw .5vw;
+  border-radius: 5px;
+  background-color: rgba(0,0,0,.5);
+  h3 {
+    font-size: 100%;
+    margin: 8px 0 4px;
+  }
+  .metric {
+    font-size: 60%;
+  }
+  .stat {
+    font-weight: bold;
+    font-size: 3vw;
+    color: #ccff33;
+  }
+}

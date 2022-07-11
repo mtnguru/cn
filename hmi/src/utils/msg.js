@@ -1,26 +1,34 @@
 //require('dotenv').config();
 require('./msgE');
-var mqttCn = require('./mqttCn');
+const mqttNode = require('./mqttNode');
 
 let msgFlagsA = {
-  debug: false,
-  notifications: false,
-  debug: false,
-  debug: false,
-  console: false,
+  ERROR: true,
+  WARNING: true,
+  DEBUG: true,
+  NOTIFY: true,
+  ADMIN: true,
+  CONFIG: true,
+  ALARM: true,
+  CHAT: true,
+  NOTES: true,
+  USER: true,
+  INPUT: true,
+  OUTPUT: true,
+  DOE: true
 }
 
 const msg = (func, msgType, ...snippets) => {
   let payload = {
     function: func,
-//  program: global.cn.program,
+//  program: global.aaa.program,
     msgType: msgE[msgType],
     content: snippets.join(' '),
   }
-  const topic = mqttCn.makeTopic(msgType,"post")
+  const topic = mqttNode.makeTopic(msgType,"post")
   const jpayload = JSON.stringify(payload);
-  if (mqttCn.connected()) {
-    mqttCn.send(topic, jpayload);
+  if (mqttNode.connected()) {
+    mqttNode.publish(topic, jpayload);
   }
 
   let type = msgE[msgType]
@@ -31,6 +39,7 @@ const msg = (func, msgType, ...snippets) => {
   } else if (msgType == WARNING) {
     type = '!!!!!!!!!! WARNING'
   }
-  console.log(func, type, ...snippets);
+  console.log(type, func, ...snippets);
 }
+
 module.exports = msg

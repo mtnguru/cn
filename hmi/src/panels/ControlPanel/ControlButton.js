@@ -2,14 +2,19 @@
 
 import React, {useState} from 'react';
 
+import {mgDebug} from "../../utils/mg"
+import {mqttPublish} from "../../utils/mqttReact"
+// import {makeTagsFromMetric} from "../../utils/influx"
+import {findMetric} from "../../utils/metrics"
 
 import "./ControlButton.scss";
-import {mqttPublish} from "../../utils/mqtt";
+const makeTagsFromMetric = require('../../utils/influx')
 
 const ControlButton = (props) => {
   const [btnState, setBtnState] = useState(false)
   const clickH = (event) => {
-    console.log('Button pressed',event.target.id)
+    const f = "ControllButton::clickH"
+    mgDebug(f,'Button pressed',event.target.id)
     let topic;
     let payload;
     if (props.type === "push") {
@@ -19,8 +24,12 @@ const ControlButton = (props) => {
       setBtnState((prevState) => {
         return !prevState
       })
-      topic = 'lab1/output/control/' + props.client
-      payload = `{"metric": "${props.metric}", "value": "${btnState ? "1" : "0"}"}`
+      topic = 'lab1/user/influx/' + props.client
+
+      const metric = findMetric(props.metricName)
+      if (metric == null) return;
+      payload = `${makeTagsFromMetric(props.metricName)} value=${btnState ? "1" : "0"}`
+
     }
     console.log('   send ', topic, payload)
 //  props.onclick(event)

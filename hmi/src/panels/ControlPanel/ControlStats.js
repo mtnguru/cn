@@ -1,31 +1,40 @@
 // File: ControlStats.js
 import React, {useState, useEffect} from 'react';
-import {mqttRegisterInfluxCB} from '../../utils/mqtt'
+import {mqttRegisterMetricCB} from '../../utils/mqttReact'
+import {findMetric} from '../../utils/metrics'
 
 import './ControlStats.scss'
 
 const ControlStats = (props) => {
-  const [register, setRegister] = useState(true);
+//const [register, setRegister] = useState(true);
   const [stat, setStat] = useState(0);
+  const [metric, setMetric] = useState({});
 
   useEffect(() => {
-    if (register) {
-      mqttRegisterInfluxCB(props.metric, metricCB)
-      setRegister(prevRegister => {
-        return false
+    const metricCB = (metric, topic, payload, tags, values) => {
+      const f = "ControlStats::metricCB"
+      console.log(f,"enter ", topic)
+      setStat((prevStat) => {
+        return parseFloat(values.value).toFixed(metric.decimals);
       })
+      if (props.metricCB) {
+        props.metricCB(metric, topic, payload, tags, values)
+      }
     }
-  }, [register, props.metric])
 
-  const metricCB = (topic, payload, tags, values) => {
-    const f = "ControlStats::metricCB"
-    setStat(values.value)
-    console.log(f,"enter ", topic)
-  }
+    setMetric(findMetric(props.metricName))
+    mqttRegisterMetricCB(props.metricName, metricCB)
+  }, [props.metricName])
+
+//if (register) {
+//  mqttRegisterMetricCB(props.metric, metricCB)
+//  register = false
+//}
 
   return (
     <div className="control-stats">
-      <h3>{props.metric}</h3>
+      <h3>{metric.label}</h3>
+      <div className="metric">{metric.metricName}</div>
       <div className="stat">{stat}</div>
     </div>
   )

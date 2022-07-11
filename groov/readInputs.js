@@ -10,8 +10,7 @@
 //    |measurement|,tag_set| |field_set| |timestamp|
 //    +-----------+--------+-+---------+-+---------+
 const groov_api = require('./groov_api');
-const mqtt_cn = require('./mqtt_cn');
-const inputs = require(`${process.env.ROOT_PATH}/config/inputs.js`);
+const mqttNode = require('./utils/mqttNode');
 
 let readInterval;
 
@@ -22,10 +21,21 @@ const stopInputs = () => {
 }
 
 const readInput = async (name,input,ctime) => {
-  const f = "readInputs:readInput - "
-  console.log (f,'enter')
-  let value = await groov_api.readChannel(name, input)
+  const f = "readInput:readInput - "
+  console.log(f, 'enter ', name)
 
+  const channelReadCB = (data) => {
+    const f = 'readInputs::channelReadCB'
+    console.log(f,'enter')
+    const topic = global.aaa.publishTopics['input'];
+    let payload = `${input.tags} value=${data.value.toFixed(2)}`
+    mqttNode.publish(topic, payload)
+  }
+
+  await groov_api.readChannel(name, input, channelReadCB)
+}
+
+/*
   if (input.lastValue) {
     if (input.lastValue == value)  {
       input.nochange++;
@@ -36,25 +46,25 @@ const readInput = async (name,input,ctime) => {
       // Format the influxdb line protocol
       let line = `${input.tags} value=${value} ${ctime}`;
       console.log('      ', input.topic, line);
-      mqtt_cn.send(input.topic, line)
+      mqttNode.publish(input.topic, line)
     }
   } else {
     input.nochange = 0;
   }
   input.lastValue = value;
   console.log (f,'exit')
-}
+ */
 
 const readInputs = async () => {
   const f = "readInputs:readInputs - "
   readInterval = setInterval(async () => {
-    console.log ('\nstart readInputs')
+    console.log (f, 'enter')
     const start = performance.now();
     const ntime = new Date().getTime() * 1000000;
 
     const funcs = [];
-    for (name in inputs) {
-      let input = inputs[name];
+    for (let name in global.aaa.metrics) {
+      let input = global.aaa.metrics[name].input;
       if (input) {
         funcs.push(readInput(name,input,ntime));
       }
@@ -63,9 +73,9 @@ const readInputs = async () => {
     await Promise.all(funcs)
 
     const end = performance.now();
-    console.log ('end ', end - start)
+    console.log (f, 'end ', end - start)
 
-  }, 1000)
+  }, global.aaa.sampleInterval)
 }
 
 module.exports = { readInputs }

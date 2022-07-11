@@ -1,0 +1,49 @@
+{
+  "name": "expt",
+  "label": "Cabin Sensors",
+  "metrics": {
+    "Cabin_K_Bedroom_C": {
+      "update": "input",
+      "type": "ControlValue",
+      "convert": "c2f",
+      "position": [
+        66,
+        50
+      ]
+    },
+    "Cabin_K_Fireplace_C": {
+      "update": "input",
+      "type": "ControlValue",
+      "convert": "c2f",
+      "position": [
+        62,
+        40
+      ]
+    },
+    "Cabin_K_Outside_C": {
+      "update": "input",
+      "type": "ControlValue",
+      "convert": "c2f",
+      "position": [
+        78,
+        50
+      ]
+    },
+    "arduino2_K_Outdoors_C": {
+      "update": "input",
+      "type": "ControlValue",
+      "position": [
+        88,
+        56
+      ]
+    },
+    "arduino3_K_LivingRoom_C": {
+      "update": "input",
+      "type": "ControlValue",
+      "position": [
+        50,
+        35
+      ]
+    }
+  }
+}

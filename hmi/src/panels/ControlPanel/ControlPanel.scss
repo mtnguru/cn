@@ -5,10 +5,23 @@
   header {
     width: 100%;
   }
+
+  .control-flex {
+    display: flex;
+  }
+
+  h2 {
+    width: 100%;
+  }
+  .stats {
+  }
+  .controls {
+    width: 400px;
+    margin-right: 2rem;
+  }
+
   .control-bar {
     height: 30px;
-    width: 100%;
-    max-width: 500px;
     margin: 5px 0;
     padding: 5px 15px;
     border-radius: 6px;
@@ -18,10 +31,7 @@
     }
   }
 
-  .content {
-    display: flex;
-    width: 100%;
-
+  .card {
+    margin-bottom: 10px;
   }
-
 }

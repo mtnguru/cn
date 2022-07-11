@@ -7,6 +7,7 @@
     "@testing-library/react": "^13.2.0",
     "@testing-library/user-event": "^13.5.0",
     "from": "^0.1.7",
+    "fs": "^0.0.1-security",
     "mqtt": "^4.3.7",
     "precompiled-mqtt": "^4.3.13",
     "react": "^18.1.0",
@@ -15,6 +16,7 @@
     "react-scripts": "5.0.1",
     "sass": "^1.52.1",
     "url": "^0.11.0",
+    "util": "^0.12.4",
     "web-vitals": "^2.1.4"
   },
   "scripts": {

@@ -1,0 +1,13 @@
+{
+  "name": "doe-1",
+  "desc": "Optimize the operating point",
+  "static": {
+    "gasD2": 5,
+    "temperature": [200, 250]
+  },
+  "runs": {
+    "pressure": [100, 150, 100, 150],
+    "voltage":  [100,  90,  90, 100],
+    "gasN2":    [ 30,  45,  30,  40]
+  },
+}

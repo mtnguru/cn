@@ -1,0 +1,40 @@
+@import "../../styles/base";
+@import "../../styles/colors";
+
+.control-led {
+  display: inline-block;
+  float:right;
+  &.reset {
+    margin-left: 20px;
+  }
+  &.onboard {
+    margin-left: 10px;
+  }
+  button {
+    color: white;
+    background-color: #225;
+    padding: 5px 12px;
+    border-radius: 5px;
+    &.on {
+      background-color: #559
+    }
+  }
+  &.red button {
+   background-color: #880000;
+   &.on {
+     background-color: #ee5555;
+   }
+  }
+  &.green button {
+    background-color: #006600;
+    &.on {
+      background-color: #55dd55;
+    }
+  }
+  &.blue button {
+    background-color: #000088;
+    &.on {
+      background-color: #6688ff;
+    }
+  }
+}

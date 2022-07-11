@@ -10,7 +10,7 @@
 //    |measurement|,tag_set| |field_set| |timestamp|
 //    +-----------+--------+-+---------+-+---------+
 const groov_api = require('./groov_api');
-const mqtt_cn = require('./mqtt_cn');
+const mqtt_lt = require('./mqtt_lt');
 const inputs = require(`${process.env.ROOT_PATH}/config/inputs.js`);
 
 let readInterval;
@@ -36,7 +36,7 @@ const readInput = async (name,input,ctime) => {
       // Format the influxdb line protocol
       let line = `${input.tags} value=${value} ${ctime}`;
       console.log('      ', input.topic, line);
-      mqtt_cn.send(input.topic, line)
+      mqtt_lt.send(input.topic, line)
     }
   } else {
     input.nochange = 0;

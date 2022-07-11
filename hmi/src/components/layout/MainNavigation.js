@@ -5,7 +5,7 @@ import classes from './MainNavigation.module.scss';
 function MainNavigation() {
   return (
     <header className={classes.header}>
-      <div className={classes.logo}><h2>CN HMI</h2></div>
+      <div className={classes.logo}><h2>LabTime - HMI</h2></div>
       <nav>
         <ul>
           <li key="home"><Link to='/'>Home</Link></li>

@@ -4,54 +4,85 @@ import './index.scss';
 import App from './App';
 import { BrowserRouter } from 'react-router-dom';
 
-import { mqttConnect, mqttPublish, mqttProcessCB, mqttRegisterClientCB } from './utils/mqtt.js';
+import {mqttConnect, mqttPublish, mqttSubscribe, mqttUnsubscribe, mqttProcessCB, mqttRegisterTopicCB} from './utils/mqttReact.js';
 
-const f = "index::main"
+const f = "index::main - "
+global.aaastarted = false;
 
-const loadClientConfigCB = (topic, payload) => {
-  const f = "index::loadClientConfigCB"
-  let config = JSON.parse(payload.toString(0));
+global.aaa = {
+  name: "hmi1",
+  mqtt: {
+    clientId: `mqtt_${Math.random().toString(16).slice(3)}`, // create a random id
+    protocolId: 'MQTT',
+    protocolVersion: 4,
+    connectUrl: 'mqtt://172.16.45.7:8081',
+    username: 'data',
+    password: 'datawp',
+    connectTimeout: 10000,
+    reconnectPeriod: 120000,
+    keepAlive: 5000,
+  },
+  subscribeTopics: {
+    admin: 'lab1/admin/+/hmi1'
+  },
+}
+
+const loadConfigCB = (topic, payload) => {
+  const f = "index::loadConfigCB - "
   console.log(f,'enter', topic)
 
-  // Create full list of inputs and outputs by combining them from all clients
-  config.inputs = {}
-  config.outputs = {}
-  for (let clientName in config.clients) {
-    if (clientName !== "server") {
-      const client = config.clients[clientName]
-      for (let inputName in client.inputs) {
-        const input = client.inputs[inputName]
-        config.inputs[inputName.toLowerCase()] = input;
+  if (global.aaastarted) return;
+  global.aaastarted = true
 
-      }
-      for (let outputName in client.outputs) {
-        const output = client.outputs[outputName]
-        config.outputs[outputName.toLowerCase()] = output;
+  try {
+    // Unsubscribe from all any current topics
+    mqttUnsubscribe(global.aaa.subscribeTopics);
+
+    // Replace global.aaa object with new configuration
+    global.aaa = JSON.parse(payload.toString(0));
+
+    // Subscribe to topics
+    console.log(f, 'do subscribe', Object.values(global.aaa.subscribeTopics))
+    mqttSubscribe(global.aaa.subscribeTopics)
+
+    // Create full list of inputs and outputs by combining them from all clients
+    global.aaa.inputs = {}
+    global.aaa.outputs = {}
+    for (let clientName in global.aaa.clients) {
+      if (clientName !== "server") {
+        const client = global.aaa.clients[clientName]
+        for (let inputName in client.inputs) {
+          const input = client.inputs[inputName]
+          global.aaa.inputs[inputName.toLowerCase()] = input;
+
+        }
+        for (let outputName in client.outputs) {
+          const output = client.outputs[outputName]
+          global.aaa.outputs[outputName.toLowerCase()] = output;
+        }
       }
     }
+  } catch(err) {
+    console.log(f,'ERROR', err)
   }
-  global.cn = config;
-  console.log(f,'exit', topic, config)
+  console.log(f,'exit')
 
   startReact()
 }
 
 const getConfig = () => {
-  const topic = 'lab1/config/client/hmi1'
+  const f = "index::getConfig - "
+  console.log(f,'enter')
+  const topic = 'lab1/admin/configReq/hmi1'
   const payloadStr = "{}"
-  console.log('getConfig::call mqttPublish')
   mqttPublish(topic, payloadStr)
-  mqttRegisterClientCB('lab1/config/post/hmi1', loadClientConfigCB)
-  console.log('getConfig::exited mqttPublish')
+  mqttRegisterTopicCB('lab1/admin/config/hmi1', loadConfigCB)
+  console.log(f,'exit')
 }
 
 mqttConnect(mqttProcessCB);
-console.log(f,' - requestConfig ')
+console.log(f,'requestConfig - ')
 getConfig();
-
-setTimeout(() => {
-  console.log('darnit')
-}, 2000)
 
 // const configCB = () => {
 //   const promise = new Promise ((resolve, reject) => {
@@ -59,7 +90,8 @@ setTimeout(() => {
 //   })
 // }
 const startReact = () => {
-  console.log('startReact enter')
+  const f = "index::startReact"
+  console.log(f, 'enter')
   const root = ReactDOM.createRoot(document.getElementById('root'));
   root.render(
     <BrowserRouter>

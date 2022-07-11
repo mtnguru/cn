@@ -1,4 +1,4 @@
-var mqtt_cn = require('./utils/mqtt_cn');
+var mqtt_lt = require('./utils/mqtt_lt');
 var msg = require('./utils/msg');
 require('dotenv').config();
 
@@ -90,7 +90,7 @@ const processCB = (topic, payloadRaw) => {
 
       let payloadStr2 = JSON.stringify(config);
       console.log(f,'   send: ', payloadStr2.length, topic2, payloadStr2)
-      mqtt_cn.send(topic2, payloadStr2);
+      mqtt_lt.send(topic2, payloadStr2);
     } else if (topic.indexOf('edge/input' > -1)) {
       console.log(f,'   input: ', topic, payloadStr)
     } else {

@@ -6,30 +6,37 @@ $button-bg-color: #5500cc;
 
 .mqtt-type-bg {
   // MQTT Message type
-  .Chat, .chat        { background-color: #40b}
-  .Errors, .error     { background-color: #d0a; }
-  .Warnings, .warning { background-color: #d80; }
-  .Alarms, .alarm     { background-color: #a00; }
-  .Inputs, .input     { background-color: #05d; }
-  .Outputs, .output   { background-color: #070; }
-  .Debug, .debug      { background-color: #333; }
-  .User, .user        { background-color: #db0 }
-  .Config, .config    { background-color: #777; }
-  .Admin, .admin      { background-color: #630; }
-  .Notes, .note       { background-color: #028; }
-  .DOE, .doe          { background-color: #a1f; }
-  .Status, .status    { background-color: #0aa; }
-  .Notify, .notify    { background-color: #030; }
+  .Chat,     .chat     { background-color: #40b; }
+  .Errors,   .error    { background-color: #c09; }
+  .Warnings, .warning  { background-color: #c60; }
+  .Alarms,   .alarm    { background-color: #911; }
+  .Inputs,   .input    { background-color: #236; }
+  .Outputs,  .output   { background-color: #062; }
+  .Debug,    .debug    { background-color: #222; }
+  .Debug,    .sdebug   { background-color: #000; }
+  .User,     .user     { background-color: #962; }
+  .Admin,    .admin    { background-color: #555; }
+  .Notes,    .notes    { background-color: #a0d; }
+  .DOE,      .doe      { background-color: #089; }
+//.Status,   .status   { background-color: #92f; }
+  .Notify,   .notify   { background-color: #62c; }
 }
 
 .mqtt-client-bg {
   // MQTT message source
-  .riolc      { background-color: #02a; }
-  .epiclc     { background-color: #089 }
-  .arduino2   { background-color: #a04; }
-  .arduino3   { background-color: #d70; }
-  .hmi1       { background-color: #0a0; }
-  .controller { background-color: #a0d; }
-  .server     { background-color: #640; }
+  .riolc      { background-color: #621 }
+  .epiclc     { background-color: #52a; }
+  .arduino2   { background-color: #141; }
+  .arduino3   { background-color: #04a }
+  .hmi1       { background-color: #a51; }
+  .controller { background-color: #719; }
+  .server     { background-color: #630; }
   .mqtt_sim   { background-color: #666; }
 }
+
+.difference-grey-bg   { background-color: #666; }
+.difference-red-bg    { background-color: #a34; }
+.difference-orange-bg { background-color: #d70; }
+.difference-green-bg  { background-color: #0a0; }
+.difference-cyan-bg   { background-color: #46f; }
+.difference-blue-bg   { background-color: #20c; }

@@ -1,48 +1,56 @@
 import React, {useState, useEffect} from 'react';
-import influx from "../../utils/influx"
-
 import Card from '../../components/ui/Card'
 import ('./MqttItem.scss')
 
+const extractFromTags = require('../../utils/influx')
+
 const MqttItem = (props) => {
-  const [payloadOut, setPayloadOut] = useState(props.item.payload)
+  const [payloadOut, setPayloadOut] = useState('')
 
   // Format the payload - Raw, JSON, Pretty
   useEffect(() => {
-//  console.log('MqttItem useEffect ', props.item.payload)
-    let payloadStr
+    let payloadStr = props.item.payload         // Display the Raw payload
 
-    if (props.pretty === "Raw") {
-      payloadStr = props.item.payload         // Display the Raw payload
-    } else {
-      if (props.item.payload[0] === '{') {    // if this payload is JSON
-        const payload = JSON.parse(props.item.payload);
-        payloadStr = JSON.stringify(payload, null, 3)
-        if (props.pretty === "Pretty") {
-          if (payload.content) {
-            payloadStr = `${payload.function} - ${payload.content}`
-          } else if (props.item.type === 'output') {
-            payloadStr = `${payload.metric} - ${payload.value}`
-          } else {
-            payloadStr = payloadStr
-              .replace(/"|/g, '')         // remove all double quotes
+    if (props.pretty !== 'Raw') {
+      if (props.item.action === 'configReq') {
+        payloadStr = 'Request Configuration - who am I'
+      } else if (props.item.action === 'reset') {
+        payloadStr = 'Request Reset'
+      } else {
+        if (props.item.payload[0] === '{') {    // if this payload is JSON
+          const payload = JSON.parse(props.item.payload);
+          payloadStr = JSON.stringify(payload, null, 3)
+          if (props.pretty === "Pretty") {
+            if (payload.content) {
+              payloadStr = `${payload.function} - ${payload.content}`
+            } else if (props.item.type === 'output') {
+              payloadStr = `${payload.metric} - ${payload.value}`
+            } else {
+              payloadStr = payloadStr
+                .replace(/"|/g, '')         // remove all double quotes
 
-              .replace(/^{\n/, '')        // remove the opening {
-              .replace(/}$/, '')         // remove the closing }
+                .replace(/^{\n/, '')        // remove opening {
+                .replace(/}$/, '')          // remove closing }
 
-              .replace(/,\n/g, '\n')      // remove all trailing commas
-              .replace(/\n\s*}\n/g, '\n') // remove all } on a line by themselves
-              .replace(/\n\s*}\n/g, '\n') // do it a second time
-              .replace(/: {\n/g, ':\n');  // remove all trailing {
+                .replace(/,\n/g, '\n')      // remove all trailing commas
+                .replace(/\n\s*[\]}]\n/g, '\n') // remove all } on a line by themselves
+                .replace(/\n\s*[\]}]\n/g, '\n') // do it a second time
+                .replace(/: [[{]\n/g, ':\n');  // remove all trailing
+            }
+          }
+        } else if (props.pretty === "Pretty" &&
+               (props.item.type === 'input' || props.item.type === 'user' || props.item.type === 'output')) {
+          let {tags, values} = extractFromTags(props.item.payload)
+          payloadStr = `${tags["Metric"]} -- ${values["value"]}`
+        } else if (props.item.type === 'admin') {
+          if (props.item.action === 'configReq') {
+            payloadStr = 'Request configuration - who am I and why am I here?'
           }
         }
-      } else if (props.item.type === 'input' || props.item.type === 'user' || props.item.type === 'output') {
-        let {tags, values} = influx.extract(props.item.payload)
-        payloadStr = `${tags["Metric"]} -- ${values["value"]}`
       }
     }
     setPayloadOut(payloadStr)
-  }, [props.item.type, props.item.payload, props.pretty])
+  }, [props.item.action, props.item.type, props.item.payload, props.pretty])
 
   return (
     <div className='mqtt-item mqtt-type-bg'>

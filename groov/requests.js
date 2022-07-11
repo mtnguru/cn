@@ -11,6 +11,8 @@ const setConfig = (config) => {
   console.log(f,'exit');
 }
 
+processOutput
+
 const process = (topic, payload_json) => {
   const f = "requests:process - "
   console.log(f,'enter', topic, payload_json.toString())

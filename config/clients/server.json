@@ -1,5 +1,7 @@
 {
   "name": "server",
+  "clientName": "server",
+  "server":     {},
   "project": "lab1",
   "mqtt": {
     "url": "mqtt://merlin:1883",
@@ -9,19 +11,18 @@
     "reconnectPeriod": 10000
   },
   "subscribeTopics": {
-    "recipe": "PROJECT/config/recipe/#",
-    "config": "PROJECT/config/#"
+    "admin": "PROJECT/admin/#"
   },
   "clients": {
     "all": {
       "name": "Select all"
     },
-    "controller": "172.16.45.7",
-    "hmi1":       "172.16.45.7",
-    "server":     "172.16.45.7",
-    "epiclc":     "172.16.45.3",
-    "riolc":      "172.16.45.4",
-    "arduino2":   "172.16.45.32",
-    "arduino3":   "172.16.45.33"
+    "controller": {},
+    "hmi1": {},
+    "server": {},
+    "epiclc": {},
+    "riolc": {},
+    "arduino2": {},
+    "arduino3": {}
   }
 }

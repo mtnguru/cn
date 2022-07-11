@@ -1,0 +1,7 @@
+{
+  "url": "mqtt://merlin:1883",
+  "username": "data",
+  "password": "datawp",
+  "connectTimeout": 4000,
+  "reconnectPeriod": 10000
+}

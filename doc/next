@@ -1,15 +1,63 @@
+So, how do I configure a user metric -
+*  Have a separate configuration for the hmi - 
+*  This will negate the need for configuring "user" in metrics files.
+*    {
+*      metricName: {
+*        update: output|input|user|alarm?
+*        type: ControlValue
+*        x: xposition
+*        y: yposition
+*        min: min
+*        max: max
+*        step: step
+*      }
+*      metricName: {
+*        update: output|input|user|alarm?
+*        type: ControlValue
+*        x: xposition
+*        y: yposition
+*        min: min
+*        max: max
+*        step: step
+*      }
+*    }
 
-So what next?  
-  General 
-    Make outputs and user messages influxdb format
-  Errors - nodejs
-    1 Create the msg function - add flags to enable/disable levels
-  HMI
+
+
+Fix the lights
+   Needs certificates
+Create text input field
+
+* Save DOE experiment
+*    Save this experiment - send to MQTT.
+  Save the values in the server
+  When uploading configuration, add the values to the records
+  Add last sample time to everything
+  
+  User is no longer a part of the metrics file, they have been moved to the
+
+
+  Make the slider and checkbox part of Input.js
+  Copy the HMI configuration directory into the Input component
+
+
+
+
+
+
+
+
+*o what next?  
+* General 
+*   Make outputs and user messages influxdb format
+* Errors - nodejs
+*   1 Create the msg function - add flags to enable/disable levels
+* HMI
 *   1 Finish the filters - find out why it's slow?
-  EPIC - nodejs
-    3 Get the groov loader working again.
-  controller
-    1 Look for inputs automatically return them as outputs
+* EPIC - nodejs
+*   3 Get the groov loader working again.
+* controller
+*   1 Look for inputs automatically return them as outputs
   telegraf 
     1 Use topic +/+/+/+/influx - to load
        Inputs, Outputs, User actions

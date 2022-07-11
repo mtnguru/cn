@@ -1,6 +1,7 @@
 const gl = require('get-current-line').default
-const mqttCn = require('./utils/mqttCn');
+const mqttNode = require('./utils/mqttNode');
 const msg     = require('./utils/msg');
+const influx  = require('./utils/influx');
 const fs = require('fs');
 
 require('dotenv').config();
@@ -18,101 +19,64 @@ const getJsonFile = (filepath) => {
 
 }
 
-/**
- * createTags() - Given the metric name, create the influxdb line protocol tags string
- *
- * 1 Input/User/output
- * 2 Component
- * 3 Device
- * 4 Position
- * 5 Composition
- * 6 Units
- **/
-const createTags = (metric) => {
-  const f = "configurator::createTags"
-  const flds = metric.split("_")
-  const nflds = flds.length;
-  let tags = '';
-  if (nflds <= 2) {
-    tags = metric
-  } else {
-    tags = `${flds[nflds - 1]},Metric=${metric},Type=${flds[0]},Component=${flds[1]}`
-    if (nflds > 3) {
-      tags += `,Device=${flds[2]}`
-      if (nflds > 4) {
-        tags += `,Position=${flds[3]}`
-        if (nflds > 5) {
-          tags += `,Composition=${flds[4]}`
-        }
-      }
-    }
-  }
-  return tags;
-}
-
 /*
  * Processes a request for a devices configuration - device, inputs, outputs.
  */
-const getClientConfig = (ip) => {
+const getClientConfig = (id) => {
   const f = 'configurator:getClientConfig'
-  msg(f,NOTIFY,'enter',ip);
+  msg(f,DEBUG,'enter',id);
 
   // Find the client first by clientname, then by searching the IP's of all devices.
   let clientName = '';
   let client;
-  if (ip in global.cn.clients) {
-    clientName = ip
+  if (id in global.aaa.clients) {
+    clientName = id
   } else {
-    for (client in global.cn.clients) {
-      if (ip === global.cn.clients[client]) {
-        msg(f, DEBUG, '  found ', ip, client)
+    for (client in global.aaa.clients) {
+      msg(f, DEBUG, '   check ',global.aaa.clients[client].ip)
+      if (id === global.aaa.clients[client].ip) {
+        msg(f, DEBUG, 'found client - ', id, client)
         clientName = client;
       }
     }
     if (!clientName) {
-      msg(f, ERROR, 'Cannot find client', clientName)
+      msg(f, ERROR, 'Cannot find client', id)
       return null;
     }
   }
 
   // Read in the configuration file for the primary device
-  let data = fs.readFileSync(`${process.env.ROOT_PATH}/config/clients/${clientName}.json`)
-  config = JSON.parse(data)
-  config.ip = ip
+  const path = `${process.env.ROOT_PATH}/config/clients/${clientName}.json`
+  msg(f,NOTIFY,'read: ',path);
+  let json = fs.readFileSync(path)
+  config = JSON.parse(json)
   config.clientName = clientName;
   config.configType = 'client'
   config.selected = 'true'
-  mqttCn.completeTopics(config)
+  config.project = global.aaa.project
+  mqttNode.completeTopics(config)
 
-                                            // Add properties to input channels
+  // The 3 loops below can be deleted soon
+  // Configure the input channels
   for (let name in config.inputs) {
     let channel = config.inputs[name]
-    channel.tags = createTags(name)         // Create influx tags
+    channel.tags = influx.makeTagsFromMetricId(name)    // Create influx tags
     channel.clientName = clientName;        // Add client name
     channel.metric = name                   // add metric name
-    channel.lastValue = ''                  // add last value
-    channel.sum = 0;                        // sum  - sum/npts = average
-    channel.npts = 0;                       // Npts used to calc average
-    channel.lastValueTime = 0;              // add last value time
-    channel.cbs = {};                       // Callbacks for handling new input
   }
-
-                                            // Add properties to output channels
+  // Add properties to output channels
   for (let name in config.outputs) {
     let channel = config.outputs[name]
-    channel.tags = createTags(name)         // Create influx tags
+    channel.tags = influx.makeTagsFromMetricId(name)    // Create influx tags
     channel.clientName = clientName;        // Add client name
     channel.metric = name                   // add metric name
-    channel.cbs = {};                       // Callbacks for handling new input
   }
-
                                             // Add properties to user channels
   for (let name in config.user) {
     let channel = config.user[name]
-    channel.tags = createTags(name)         // Create influx tags
-    channel.clientName = clientName;                // Add client name
-    channel.metric = name                           // add metric name
-    channel.cbs = {};   // Callbacks for handling new input
+    channel.tags = influx.makeTagsFromMetricId(name)    // Create influx tags
+    channel.clientName = clientName;        // Add client name
+    channel.metric = name                   // add metric name
   }
   msg(f,DEBUG, 'exit');
   return config;
@@ -120,6 +84,7 @@ const getClientConfig = (ip) => {
 
 /**
  * If the primary devices has a clients property, then load those clients also.
+ * }
  *
  * @param clients
  * @returns {{}}
@@ -129,7 +94,6 @@ const getAllClientsConfig = (clients) => {
   msg(f,DEBUG, 'enter');
   const config={}
   for (clientName in clients) {
-    msg(f,DEBUG, 'DUDE - ',clientName);
     if (clientName === "all") {
       config[clientName] = clients[clientName];
     } else {
@@ -139,15 +103,73 @@ const getAllClientsConfig = (clients) => {
   return config;
 }
 
+const loadClientConfig = (clientName) => {
+  const f = "configurator::loadClientConfig"
+  let payloadOut = getClientConfig(clientName)
+  clientName = payloadOut.clientName
+
+// if there is a list of clients in this config - read those in too
+  if (payloadOut.clients) {
+    msg(f, DEBUG, "load all clients")
+    payloadOut.clients = getAllClientsConfig(payloadOut.clients);
+  }
+
+// Add the msgTypes to the client
+  if (payloadOut.msgTypes) {
+    msg(f, DEBUG, "load msgTypes")
+    const path = `${process.env.ROOT_PATH}/config/general/msgTypes.json`
+    payloadOut.msgTypes = JSON.parse(fs.readFileSync(path))
+  }
+// Add the metrics to the client
+
+// Build client list
+  if (payloadOut.metrics) {
+    msg(f, DEBUG, "load metrics, config/metrics/metrics.json")
+    const clients = (payloadOut.clients) ? Object.keys(payloadOut.clients) : [clientName]
+    const path = `${process.env.ROOT_PATH}/config/metrics/metrics.json`
+    payloadOut.metrics = JSON.parse(fs.readFileSync(path))
+    for (let metricName in payloadOut.metrics) {
+      const metric = payloadOut.metrics[metricName]
+      metric.metricName = metricName
+      metric.units = metricName.split('_')[-1]
+
+      // Only include metrics that involve clients in the clients list
+      if ((metric.input && clients.includes(metric.input.clientName)) ||
+          (metric.output && clients.includes(metric.output.clientName)) ||
+          (metric.user && clients.includes(metric.user.clientName))) {
+        if (metric.input) {
+          metric.input.tags = influx.makeTagsFromMetric(metricName,"I")
+        }
+        if (metric.output) {
+          metric.output.tags = influx.makeTagsFromMetric(metricName,"O")
+        }
+        if (metric.user) {
+          metric.user.tags = influx.makeTagsFromMetric(metricName,"U")
+        }
+
+        // Move the metric to a metric name with all small letters
+        let sMetricName = metricName.toLowerCase()
+        if (sMetricName != metricName) {
+          payloadOut.metrics[sMetricName] = metric
+          delete payloadOut.metrics[metricName]
+        }
+      } else {
+        delete payloadOut.metrics[metricName]
+      }
+    }
+  }
+  return payloadOut;
+}
+
 /**
- * processCB -
+ * processCB
  * @param inTopic
  * @param payloadRaw
  * @returns {null}
  */
 const processCB = (inTopic, payloadRaw) => {
   const f = 'configurator::processCB'
-//msg(f,DEBUG, 'enter');
+  msg(f,DEBUG, 'enter');
   let payloadOut;
   let outTopic;
   try {
@@ -155,31 +177,34 @@ const processCB = (inTopic, payloadRaw) => {
 
     const payloadInStr = payloadRaw.toString();
     let payloadIn = {}
+
+    // If the payload is JSON, parse it
     if (payloadInStr && payloadInStr !== '{}') {
       msg(f, DEBUG,"Parse payloadInStr:", payloadInStr.toString)
       payloadIn = JSON.parse(payloadInStr)
     }
     msg(f,DEBUG, 'msgType', msgType, ' action', action);
+
     // If this is a config message
-    if (msgType === 'config') {
-      if (action === 'post') {
-        msg(f, DEBUG, "Ignore all 'post' messages: ", action, ' - ', inTopic)
+    if (msgType === 'admin') {
+      if (action === 'config' || action === 'file') {
+        msg(f, DEBUG, "Ignore all 'config' messages: ", action, ' - ', inTopic)
         return;
       }
 
-      if (action === 'client') {
-        payloadOut = getClientConfig(clientName);
-        outTopic = mqttCn.makeTopic(CONFIG,'post', {clientName: clientName})
+      if (action === 'configReq') {
+        outTopic = mqttNode.makeTopic(ADMIN, 'config', {clientName: clientName})
+        payloadOut = loadClientConfig(clientName)
+      } else if (action === 'fileReq') {
+        outTopic = mqttNode.makeTopic(ADMIN,'file', {clientName: clientName})
 
-        // if there is a list of clients in this config - read those in too
-        if (payloadOut.clients) {
-          console.log(f,"load all clients")
-          payloadOut.clients = getAllClientsConfig(payloadOut.clients);
-        }
-//    } else if (action === 'allclients') {
-//      payloadOut = getAllClientsConfig(clientName);
-//      msg(f, DEBUG,"get all clients config")
-//      outTopic = mqttCn.makeTopic(CONFIG,'post', {clientName: clientName})
+        path = `${process.env.ROOT_PATH}/config/${payloadIn.path}`
+        msg(f, DEBUG, "Read json file: ", path)
+        json = fs.readFileSync(path)
+        payloadOut = JSON.parse(json)
+      } else if (action === "reset") {
+        msg(f, DEBUG, "Ignore reset requests")
+
       } else {
         msg(f, ERROR,"Unknown configuration request: ", action, ' - ', inTopic)
         return;
@@ -188,7 +213,7 @@ const processCB = (inTopic, payloadRaw) => {
     } else {
       msg(f, DEBUG,"call readJsonFile")
       if (!payloadIn.filename) {
-        msg(f, ERROR,"Payload must specify a filename", action)
+        msg(f, ERROR,"Payload must specify a filename: ", action)
       }
       payloadOut = readJsonFile(`${flds[3]}/${payloadIn.filename}`)
       if (!payloadOut) {
@@ -198,8 +223,8 @@ const processCB = (inTopic, payloadRaw) => {
     }
 
     let payloadOutStr = JSON.stringify(payloadOut);
-    msg(f, DEBUG,"call mqttCn.send ",outTopic, payloadOut)
-    mqttCn.send(outTopic, payloadOutStr);
+    msg(f, DEBUG,"call mqttNode.publish ",outTopic, payloadOut)
+    mqttNode.publish(outTopic, payloadOutStr);
   } catch (err) {
     msg(f, ERROR, err)
   }
@@ -208,4 +233,3 @@ const processCB = (inTopic, payloadRaw) => {
 }
 
 module.exports.processCB = processCB;
-module.exports.createTags = createTags;

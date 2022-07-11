@@ -1,25 +1,16 @@
 {
   "name": "arduino3",
+  "ip": "172.16.45.33",
   "model": "arduino",
-  "sampleInterval": 1000,
+  "sampleInterval": 10000,
   "telegraf": "cabin_cn",
   "subscribeTopics": {
-    "output": "PROJECT/output/control/MY_CLIENT_NAME",
-    "config": "PROJECT/config/post/MY_IP",
+    "output": "PROJECT/output/influx/MY_CLIENT_NAME",
     "admin":  "PROJECT/admin/+/MY_CLIENT_NAME"
   },
-  "inputs": {
-    "I_arduino3_K_LivingRoom_C": {
-      "type": "MAX6675",
-      "channels": "2,4,5",
-      "desc": "Max 6675 thermocouple board"
-    }
+  "publishTopics": {
+    "input": "PROJECT/input/influx/MY_CLIENT_NAME/TELEGRAF",
+    "admin": "PROJECT/admin/+/MY_CLIENT_NAME"
   },
-  "outputs": {
-    "O_arduino3_LED_Onboard_On": {
-      "type": "digital",
-      "channel": "16",
-      "desc": "Arduino onboard LED"
-    }
-  }
+  "metrics": {}
 }

@@ -7,7 +7,7 @@ let client;
 let mqttConnect = util.promisify(mqtt.connect)
 
 const connect = (device, topics, connectCB, messageCB) => {
-  const f = 'mqtt_cn:connect - '
+  const f = 'mqtt_lt:connect - '
   console.log(f,'enter  device: ', device)
   let url = `mqtt://${process.env.MQTT_IP}:${process.env.MQTT_PORT}`
   let opt =
@@ -37,7 +37,7 @@ const connect = (device, topics, connectCB, messageCB) => {
 }
 
 const subscribe = (topics, cb) => {
-  const f = 'mqtt_cn:subscribe - '
+  const f = 'mqtt_lt:subscribe - '
   client.subscribe(topics, function() {
     console.log(f,'subscribed')
   });
@@ -49,7 +49,7 @@ const subscribe = (topics, cb) => {
  * send - send a payload and topic on MQTT broker
  */
 const send = async (topic, payload) => {
-  const f = 'mqtt_cn:send - '
+  const f = 'mqtt_lt:send - '
   console.log(f,'enter  topic: ',topic,'   payload: ', payload);
   const res = client.publish(topic,payload,{qos: 0, retain: false})
   console.log(f,'exit')

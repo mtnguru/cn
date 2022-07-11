@@ -1,44 +1,22 @@
 {
   "name": "epiclc",
+  "clientName": "epiclc",
+  "ip": "172.16.45.3",
   "model": "epic",
-  "sampleInterval": 1000,
+  "sampleInterval": 10000,
   "telegraf": "cabin_cn",
   "subscribeTopics": {
-    "output": "PROJECT/output/control/MY_CLIENT_NAME",
-    "config": "PROJECT/config/post/MY_IP",
-    "admin":  "PROJECT/admin/post/MY_CLIENT_NAME"
+    "output": "PROJECT/output/influx/MY_CLIENT_NAME",
+    "admin":  "PROJECT/admin/+/MY_CLIENT_NAME"
+  },
+  "publishTopics": {
+    "input": "PROJECT/input/influx/MY_CLIENT_NAME/TELEGRAF",
+    "admin": "PROJECT/admin/+/MY_CLIENT_NAME"
   },
   "headers": {
     "apiKey": "mnMmq5awnB3DwMsmwFFVToYTqeHtJ8Xf",
     "Content-Type": "application/json; charset=utf-8",
     "_rejectUnauthorized": false
   },
-  "inputs": {
-    "I_PID_RTD_C": {
-      "type" : "analog",
-      "module": "2",
-      "channel": "0",
-      "desc": "PID demo RTD temperature sensor"
-    }
-  },
-  "outputs": {
-    "O_Backpanel_LED_Red_On": {
-      "type": "digital",
-      "module": "1",
-      "channel": "7",
-      "desc": "epiclc Backpanel Red LED"
-    },
-    "O_Backpanel_LED_Green_On": {
-      "type": "digital",
-      "module": "1",
-      "channel": "8",
-      "desc": "epiclc Backpanel Green LED"
-    },
-    "O_Backpanel_LED_Blue_On": {
-      "type": "digital",
-      "module": "1",
-      "channel": "9",
-      "desc": "epiclc Backpanel Blue LED"
-    }
-  }
+  "metrics": {}
 }

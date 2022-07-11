@@ -9,15 +9,25 @@
     "reconnectPeriod": 10000
   },
   "subscribeTopics": {
-    "recipe": "PROJECT/config/recipe/#",
-    "config": "PROJECT/config/#"
+    "input":  "PROJECT/input/influx/#",
+    "user": "PROJECT/user/influx/#",
+    "admin":  "PROJECT/admin/+/controller"
+  },
+  "publishTopics": {
+    "output": "PROJECT/output/influx/SRC_IP/TELEGRAF",
+    "messages": "PROJECT/MSGTYPE/json/SRC_IP"
   },
   "clients": {
-    "controller": "172.16.45.7",
-    "hmi1":       "172.16.45.7",
-    "epiclc":     "172.16.45.3",
-    "riolc":      "172.16.45.4",
-    "arduino2":   "172.16.45.32",
-    "arduino3":   "172.16.45.33"
+    "server":     {},
+    "controller": {},
+    "hmi1":       {},
+    "epiclc":     {},
+    "riolc":      {},
+    "arduino2":   {},
+    "arduino3":   {}
+  },
+  "metrics": {},
+  "start": {
+
   }
 }

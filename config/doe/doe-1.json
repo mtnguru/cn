@@ -1,0 +1,18 @@
+{
+  "name": "doe-1",
+  "desc": "Optimize the operating point",
+  "static": {
+    "Ch_MFC_Gas_D2_sccm": {
+      "value": 125
+    },
+    "Ch_K_TopCenter_C": {
+      "value": 425
+    }
+  },
+  "numberRuns": 8,
+  "variables": {
+    "Ch_Baratron_torr":   [100,  150, 100, 150, 140, 125, 125, 130],
+    "PS_DC_V":            [1100,1200,1300,1100,1250,1400,1100,1350],
+    "Ch_MFC_Gas_N2_sccm": [ 30,   45,  30,  40,  32,  42,  45,  26]
+  }
+}

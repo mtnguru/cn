@@ -8,7 +8,7 @@ import MqttFilterClient from './MqttFilterClient';
 import MqttDisplayActions from './MqttDisplayActions';
 import MqttList from './MqttList';
 import "./MqttPanel.scss";
-import {mqttRegisterClientCB} from "../../utils/mqtt";
+import {mqttRegisterTopicCB} from "../../utils/mqttReact";
 
 let registered = false;
 
@@ -77,33 +77,40 @@ const MqttPanel = (props) => {
     })
 
     setList((prevList) => {
-      return [item,...prevList]
+      if (prevList.length > 2000) {
+        prevList = prevList.slice(1,1500)
+        setFilteredList (() => {
+          return prevList.filter(validMsg);
+        })
+      }
+      return (prevList) ? [item, ...prevList] : [item]
     })
 
     // Add the item to the filtered list
     if (validMsg(item)) {
       setFilteredList((prevFilteredList) => {
-        return [item, ...prevFilteredList]
+        return (prevFilteredList) ? [item, ...prevFilteredList] : [item]
       })
     }
   }
 
   if (!registered) {
     registered = true;
-    mqttRegisterClientCB('lab1/', mqttCB)
+    mqttRegisterTopicCB('lab1/', mqttCB)
+
   }
 
   const validMsg = (item) => {
     const [,type,,clientName] = item.topic.split('/')
-    if (global.cn.clients.all.selected) {
+    if (global.aaa.clients.all.selected) {
     } else {
-      if (global.cn.clients[clientName] && !global.cn.clients[clientName].selected) {
+      if (global.aaa.clients[clientName] && !global.aaa.clients[clientName].selected) {
         return false;
       }
     }
-    if (global.cn.msgTypes.all.selected) {
+    if (global.aaa.msgTypes.all.selected) {
     } else {
-      if (global.cn.msgTypes[type] && !global.cn.msgTypes[type].selected) {
+      if (global.aaa.msgTypes[type] && !global.aaa.msgTypes[type].selected) {
         return false;
       }
     }
@@ -128,7 +135,7 @@ const MqttPanel = (props) => {
   }
 
   return (
-    <div className="mqtt-panel">
+    <div className="panel mqtt-panel">
       <h2>{props.title}</h2>
       <div className="content">
         <div className='filters'>

@@ -1,9 +1,9 @@
  /* 
   *  Arduino WiFi program - arduino.ino
     - send and receive json messages with MQTT client
-       - obtain configuration information from CN program
+       - obtain configuration information from LabTime program
        - publish sensor values on change
-       - subscribe to CN output messages and set channel output accordingly
+       - subscribe to output messages and set channel output accordingly
 */
 
 #include "max6675.h"
@@ -207,8 +207,8 @@ void mqttCallback(char* topic, byte* payload, unsigned int length) {
       Serial.println((String)"   reset the arduino");
       resetFunc();
     }
-  } else if (strcmp(topic, mqttOutputSub) == 0) {  // Request Output from CN
-    logit(f,"output from CN - requesting action",NULL,level);
+  } else if (strcmp(topic, mqttOutputSub) == 0) {  // Request Output from LabTime
+    logit(f,"output from LabTime - requesting action",NULL,level);
     // influx line protocol, 2nd field is required to be metric
     char metric[40];
     char tmp[40];

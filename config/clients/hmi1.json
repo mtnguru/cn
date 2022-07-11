@@ -1,9 +1,16 @@
 {
   "name": "hmi1",
+  "clientName": "hmi1",
   "ip": "172.16.45.7",
+  "telegraf": "cabin_cn",
   "subscribeTopics": {
-    "config": "PROJECT/config/request/MY_IP"
+    "all": "PROJECT/#"
   },
+  "publishTopics": {
+    "user": "PROJECT/user/influx/MY_CLIENT_NAME/TELEGRAF"
+  },
+  "metrics": {},
+
   "pages": {
     "Expt": {
       "pageName": "Experiment"
@@ -34,62 +41,5 @@
     "riolc": {}
   },
 
-  "msgTypes": {
-    "all": {
-      "name": "Select all",
-      "selected": true
-    },
-    "alarm": {
-      "name": "Alarms",
-      "selected": true
-    },
-    "warning": {
-      "name": "Warnings",
-      "selected": true
-    },
-    "note": {
-      "name": "Notes",
-      "selected": true
-    },
-    "status": {
-      "name": "Status",
-      "selected": true
-    },
-    "doe": {
-      "name": "DOE",
-      "selected": true
-    },
-    "input": {
-      "name": "Inputs",
-      "selected": true
-    },
-    "output": {
-      "name": "Outputs",
-      "selected": true
-    },
-    "chat": {
-      "name": "Chat",
-      "selected": true
-    },
-    "user": {
-      "name": "User",
-      "selected": true
-    },
-    "config": {
-      "name": "Config",
-      "selected": true
-    },
-    "notify": {
-      "name": "Notify",
-      "selected": true
-    },
-    "error": {
-      "name": "Errors",
-      "selected": true
-    },
-    "debug": {
-      "name": "Debug",
-      "selected": true
-    }
-  }
+  "msgTypes": {}
 }

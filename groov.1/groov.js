@@ -4,7 +4,7 @@
 const f = 'groov:main - '
 require ('dotenv').config();
 
-const mqtt_cn = require('./mqtt_cn');
+const mqtt_lt = require('./mqtt_lt');
 const { readInputs } = require('./readInputs')
 const requests = require('./requests');
 
@@ -16,7 +16,7 @@ const getConfig = () => {
   try {
     let topic = 'edge/configReq'
     let payload = `{"type":"config","deviceName":"${process.env.DEVICE_NAME}"}`
-    mqtt_cn.send(topic, payload)
+    mqtt_lt.send(topic, payload)
   } catch (err) {
     console.log(f,'ERROR: cannot get configuration\n', err, '\n')
   }
@@ -39,7 +39,7 @@ const messageCB = (topic, payload) => {
 }
 
 let topics = [process.env.MQTT_TOPICS_CONFIG]
-mqtt_cn.connect(process.env.DEVICE_NAME, topics, connectCB, messageCB)
+mqtt_lt.connect(process.env.DEVICE_NAME, topics, connectCB, messageCB)
 
 console.log(f,'leave program thread')
 

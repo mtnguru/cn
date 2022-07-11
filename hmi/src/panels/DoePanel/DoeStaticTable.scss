@@ -1,0 +1,19 @@
+.doe-panel {
+  table {
+    border: 2px solid #345;
+  }
+  thead {
+    th {
+      padding: 10px;
+      background-color: #125;
+    }
+  }
+  tbody {
+    tr:nth-child(odd) {
+      background-color: #248;
+    }
+    tr:nth-child(even) {
+      background-color: #36a;
+    }
+  }
+}

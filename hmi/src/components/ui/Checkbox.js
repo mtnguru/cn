@@ -11,7 +11,3 @@ function Checkbox (props) {
 }
 export default Checkbox;
 
-/*
-      <input id={props.id} type='checkbox' name={props.id} onChange={props.onChangeH} />
-
- */

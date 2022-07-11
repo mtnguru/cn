@@ -1,0 +1,237 @@
+{
+  "PID_RTD_C": {
+    "label": "PID Temperature",
+    "desc": "PID demo RTD temperature sensor",
+    "value": 1,
+    "decimals": 2,
+    "input": {
+      "interval": 1000,
+      "clientName": "epiclc",
+      "type": "analog",
+      "module": "2",
+      "channel": "0"
+    }
+  },
+  "Backpanel_LED_Red_On": {
+    "label": "EPIC Red LED",
+    "desc": "epiclc Backpanel Red LED",
+    "value": 0,
+    "decimals": 0,
+    "output": {
+      "clientName": "epiclc",
+      "type": "digital",
+      "module": "1",
+      "channel": "7"
+    }
+  },
+  "Backpanel_LED_Green_On": {
+    "label": "EPIC Green LED",
+    "desc": "epiclc Backpanel Green LED",
+    "value": 0,
+    "decimals": 0,
+    "output": {
+      "clientName": "epiclc",
+      "type": "digital",
+      "module": "1",
+      "channel": "8"
+    }
+  },
+  "Backpanel_LED_Blue_On": {
+    "label": "EPIC Blue LED",
+    "desc": "epiclc Backpanel Blue LED",
+    "value": 0,
+    "decimals": 0,
+    "output": {
+      "clientName": "epiclc",
+      "type": "digital",
+      "module": "1",
+      "channel": "9"
+    }
+  },
+  "Cabin_K_Bedroom_C": {
+    "label": "Cabin Bedroom",
+    "desc": "K thermocouple - bedroom",
+    "value": 0,
+    "decimals": 2,
+    "input": {
+      "interval": 1000,
+      "clientName": "riolc",
+      "module": "0",
+      "channel": "0",
+      "type": "analog"
+    }
+  },
+  "Cabin_K_Fireplace_C": {
+    "label": "Cabin Fireplace",
+    "desc": "K thermocouple - fireplace",
+    "value": 0,
+    "decimals": 2,
+    "input": {
+      "interval": 1000,
+      "clientName": "riolc",
+      "module": "0",
+      "channel": "1",
+      "type": "analog"
+    }
+  },
+  "Cabin_K_Outside_C": {
+    "label": "Cabin Outside",
+    "desc": "K thermocouple - outside",
+    "value": 0,
+    "decimals": 2,
+    "input": {
+      "interval": 1000,
+      "clientName": "riolc",
+      "module": "0",
+      "channel": "2",
+      "type": "analog"
+    }
+  },
+  "arduino2_K_Outdoors_C": {
+    "label": "Bunkhouse Temperature",
+    "desc": "K thermocouple - outside bunkhouse",
+    "value": 0,
+    "decimals": 2,
+    "input": {
+      "interval": 1000,
+      "clientName": "arduino2",
+      "type": "MAX6675",
+      "channels": "2,4,5"
+    }
+  },
+  "arduino2_LED_Onboard_On": {
+    "label": "Arduino2 Onboard LED",
+    "desc": "Arduino onboard LED - outside bunkhouse",
+    "value": 0,
+    "decimals": 0,
+    "output": {
+      "clientName": "arduino2",
+      "type": "digital",
+      "channel": "16"
+    },
+    "user": {
+    }
+  },
+  "arduino3_K_LivingRoom_C": {
+    "label": "Desk temperature",
+    "desc": "K thermocouple - my desk",
+    "value": 0,
+    "decimals": 2,
+    "input": {
+      "interval": 1000,
+      "clientName": "arduino3",
+      "type": "MAX6675",
+      "channels": "2,4,5"
+    },
+    "user": {
+    }
+  },
+  "arduino3_LED_Onboard_On": {
+    "label": "Arduino3 Onboard LED",
+    "desc": "Arduino onboard LED - my desk",
+    "value": 0,
+    "decimals": 0,
+    "output": {
+      "clientName": "arduino3",
+      "type": "digital",
+      "channel": "16"
+    },
+    "user": {
+    }
+  },
+
+  "Anode_K_C": {
+    "label": "Anode Temperature",
+    "desc": "Anode temperature",
+    "value": 1,
+    "decimals": 1,
+    "user": {
+      "clientName": "hmi1",
+      "type": "slider",
+      "default": 142,
+      "min": 1200,
+      "max": 1500,
+      "step": 1
+    }
+  },
+  "Ch_MFC_Gas_D2_sccm": {
+    "label": "Deuterium Gas Flow",
+    "desc": "Deuterium gas flow",
+    "value": 0,
+    "decimals": 0,
+    "user": {
+      "clientName": "hmi1",
+      "type": "slider",
+      "default": 150,
+      "min": 100,
+      "max": 200,
+      "step": 1
+    },
+    "output": {
+    }
+  },
+  "Ch_MFC_Gas_N2_sccm": {
+    "label": "Nitrogen Gas Flow",
+    "desc": "Nitrogen gas flow",
+    "value": 0,
+    "decimals": 0,
+    "user": {
+      "clientName": "hmi1",
+      "type": "slider",
+      "default": 40,
+      "min": 30,
+      "max": 50,
+      "step": 1
+    },
+    "output": {
+    }
+  },
+  "Ch_K_TopCenter_C": {
+    "label": "Chamber TopCenter Temperature",
+    "desc": "Chamber temperature - top center",
+    "value": 0,
+    "decimals": 1,
+    "user": {
+      "clientName": "hmi1",
+      "type": "slider",
+      "default": 450,
+      "min": 300,
+      "max": 500,
+      "step": 1
+    },
+    "output": {
+    }
+  },
+  "Ch_Baratron_torr": {
+    "label": "Chamber Pressure",
+    "desc": "Chamber pressure - Baratron",
+    "value": 0,
+    "decimals": 0,
+    "user": {
+      "clientName": "hmi1",
+      "type": "slider",
+      "default": 150,
+      "min": 100,
+      "max": 150,
+      "step": 1
+    },
+    "output": {
+    }
+  },
+  "PS_DC_V": {
+    "label": "DC Power Supply Volts",
+    "desc": "DC Power supply output voltage",
+    "value": 0,
+    "decimals": 0,
+    "user": {
+      "clientName": "hmi1",
+      "type": "slider",
+      "default": 1200,
+      "min": 1000,
+      "max": 1500,
+      "step": 10
+    },
+    "output": {
+    }
+  }
+}
