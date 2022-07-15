@@ -1,12 +1,13 @@
 // File: server.js
 
+const mqttNode = require('./utils/mqttNode');
+
 const fs = require('fs')
 require('dotenv').config();
 
 const f = "server:main - "
 
 // require cn modules
-const mqttNode  = require('./utils/mqttNode');
 const configurator = require('./configurator');
 
 let jsonStr = fs.readFileSync(`${process.env.ROOT_PATH}/config/clients/server.json`)

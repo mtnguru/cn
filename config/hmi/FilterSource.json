@@ -12,10 +12,16 @@
     "label": "Status"
   },
   "arduino2": {
-    "label": "Arduino"
+    "label": "Arduino2"
   },
   "arduino3": {
     "label": "Arduino3"
+  },
+  "arduino4": {
+    "label": "Arduino4"
+  },
+  "arduino5": {
+    "label": "Arduino5"
   },
   "epiclc": {
     "label": "Epiclc"

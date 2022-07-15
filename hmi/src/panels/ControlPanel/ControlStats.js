@@ -1,7 +1,7 @@
 // File: ControlStats.js
 import React, {useState, useEffect} from 'react';
 import {mqttRegisterMetricCB} from '../../utils/mqttReact'
-import {findMetric} from '../../utils/metrics'
+import {c2f, findMetric} from '../../utils/metrics'
 
 import './ControlStats.scss'
 
@@ -15,7 +15,11 @@ const ControlStats = (props) => {
       const f = "ControlStats::metricCB"
       console.log(f,"enter ", topic)
       setStat((prevStat) => {
-        return parseFloat(values.value).toFixed(metric.decimals);
+        let val = values.value
+        if (metric.convert === 'c2f') {
+          val = c2f(val)
+        }
+        return parseFloat(val).toFixed(metric.decimals);
       })
       if (props.metricCB) {
         props.metricCB(metric, topic, payload, tags, values)

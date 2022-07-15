@@ -44,6 +44,22 @@
         50,
         35
       ]
+    },
+    "arduino4_K_KitchenCeiling_C": {
+      "update": "input",
+      "type": "ControlValue",
+      "position": [
+        40,
+        50
+      ]
+    },
+    "arduino5_K_Bathroom_C": {
+      "update": "input",
+      "type": "ControlValue",
+      "position": [
+        35,
+        60
+      ]
     }
   }
 }

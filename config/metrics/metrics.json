@@ -53,6 +53,7 @@
     "desc": "K thermocouple - bedroom",
     "value": 0,
     "decimals": 2,
+    "convert": "c2f",
     "input": {
       "interval": 1000,
       "clientName": "riolc",
@@ -66,6 +67,7 @@
     "desc": "K thermocouple - fireplace",
     "value": 0,
     "decimals": 2,
+    "convert": "c2f",
     "input": {
       "interval": 1000,
       "clientName": "riolc",
@@ -79,6 +81,7 @@
     "desc": "K thermocouple - outside",
     "value": 0,
     "decimals": 2,
+    "convert": "c2f",
     "input": {
       "interval": 1000,
       "clientName": "riolc",
@@ -133,6 +136,58 @@
     "decimals": 0,
     "output": {
       "clientName": "arduino3",
+      "type": "digital",
+      "channel": "16"
+    },
+    "user": {
+    }
+  },
+  "arduino4_K_KitchenCeiling_C": {
+    "label": "Kitchen Ceiling",
+    "desc": "K thermocouple - Above the Refrigerator",
+    "value": 0,
+    "decimals": 2,
+    "input": {
+      "interval": 1000,
+      "clientName": "arduino4",
+      "type": "MAX6675",
+      "channels": "2,4,5"
+    },
+    "user": {
+    }
+  },
+  "arduino4_LED_Onboard_On": {
+    "label": "Arduino4 Onboard LED",
+    "desc": "Arduino onboard LED - my desk",
+    "value": 0,
+    "decimals": 0,
+    "output": {
+      "clientName": "arduino4",
+      "type": "digital",
+      "channel": "16"
+    },
+    "user": {
+    }
+  },
+  "arduino5_K_Bathroom_C": {
+    "label": "Bathroom Temperature",
+    "desc": "K thermocouple - bathroom",
+    "value": 0,
+    "decimals": 2,
+    "input": {
+      "interval": 1000,
+      "clientName": "arduino5",
+      "type": "MAX6675",
+      "channels": "2,4,5"
+    }
+  },
+  "arduino5_LED_Onboard_On": {
+    "label": "Arduino5 Onboard LED",
+    "desc": "Arduino onboard LED - bathroom",
+    "value": 0,
+    "decimals": 0,
+    "output": {
+      "clientName": "arduino5",
       "type": "digital",
       "channel": "16"
     },

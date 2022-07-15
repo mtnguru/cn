@@ -6,7 +6,6 @@
     display: inline-block;
     width: 180px;
   }
-
   .value {
     display: inline-block;
     text-align: right;
@@ -33,6 +32,9 @@
     .left {
       top: 0;
       float: left;
+    }
+    .labels {
+      margin-top: -6px;
     }
     .right {
       float: right;

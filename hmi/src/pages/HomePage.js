@@ -9,11 +9,8 @@ import DoePanel from '../panels/DoePanel/DoePanel.js';
 function MqttPage() {
   return (
     <div className="mqtt-page">
-      <ControlSliderPanel title='Control Slider Panel'/>
-      <DoePanel title='DOE Panel' />
       <ControlExptPanel title='Experiment Panel'/>
       <ControlPanel title='Control Panel'/>
-      <MqttPanel title='MQTT Activity Panel'/>
     </div>
   )
 }

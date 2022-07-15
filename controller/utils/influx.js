@@ -1,8 +1,12 @@
-/**
- * extract() - extract the tags, values, and time from a line of Influx Line protocol
+/*
+ * File: influx.js
  */
-const extractFromTags = (payload) => {
-//const f = "mqttReact.js::extractInfluxTags"
+
+/**
+ * extractFromTags() - extract the tags, values, and time from a line of Influx Line protocol
+ */
+export function extractFromTags(payload) {
+//const f = "mqttReact.js::extractFromTags"
   const [tagStr,valueStr,time] = payload.split(' ')
 
   const valueA = valueStr.split(',')
@@ -28,7 +32,7 @@ const extractFromTags = (payload) => {
  * Given a metric name, create the Influx line protocol tags.
  * @param metric
  */
-const makeTagsFromMetric = (inMetric, inType = 'X') => {
+export function makeTagsFromMetric(inMetric, inType = 'X') {
   const flds = inMetric.split('_')
   const nf = flds.length
   const units = flds[nf-1]
@@ -46,7 +50,7 @@ const makeTagsFromMetric = (inMetric, inType = 'X') => {
  * Given a metric name, create the Influx line protocol tags.
  * @param metric
  */
-const makeTagsFromMetricId = inMetricId => {
+export function makeTagsFromMetricId(inMetricId) {
   const regexp = /^[a-zA-Z0-9]_+?/
   const flds = inMetricId.split('_')
   const nf = flds.length
@@ -65,8 +69,6 @@ const makeTagsFromMetricId = inMetricId => {
 // module.exports.makeTagsFromMetricId = makeTagsFromMetricId
 // module.exports.extractFromTags      = extractFromTags
 
-export {
-  makeTagsFromMetric,
-  makeTagsFromMetricId,
-  extractFromTags,
-}
+// export makeTagsFromMetric = makeTagsFromMetric
+// export makeTagsFromMetricId = makeTagsFromMetricId
+// export extractFromTags = extractFromTags

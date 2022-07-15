@@ -1,11 +1,11 @@
 {
-  "name": "arduino2",
-  "ip": "172.16.45.32",
+  "name": "arduino5",
+  "ip": "172.16.45.56",
   "model": "arduino",
   "sampleInterval": 10000,
   "telegraf": "cabin_cn",
   "subscribeTopics": {
-    "output": "PROJECT/output/control/MY_CLIENT_NAME",
+    "output": "PROJECT/output/influx/MY_CLIENT_NAME",
     "admin":  "PROJECT/admin/+/MY_CLIENT_NAME"
   },
   "publishTopics": {

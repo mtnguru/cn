@@ -16,7 +16,7 @@ function MqttFilterClient(props) {
     if (lsstr) {
       ls = JSON.parse(lsstr)
       for (let clientName in global.aaa.clients) {
-        global.aaa.clients[clientName].selected = ls[clientName].selected
+        global.aaa.clients[clientName].selected = (ls[clientName]) ? ls[clientName].selected : true
       }
     } else {
       ls = {};

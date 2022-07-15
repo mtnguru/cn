@@ -256,6 +256,21 @@ const processCB = (topic, payload) => {
   }
 }
 
+/*
+export {
+  connect
+  connected,
+  publish,
+  subscribe,
+  unsubscribe,
+  completeTopics,
+  makeTopic,
+  registerTopicCB,
+  registerMetricCB,
+  processCB,
+}
+*/
+
 module.exports.connect =   connect
 module.exports.connected = connected
 module.exports.publish =   publish

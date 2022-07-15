@@ -26,7 +26,7 @@ const DoeForm = (props) => {
 
   const cancelH = event => {
     event.preventDefault()
-    if (props.cancelH) {
+    if (props.closeH) {
       props.closeH(event)
     }
   }

@@ -33,11 +33,11 @@ function App() {
         <Routes>
           <Route path='/'         element={<HomePage />}  />
           <Route path='/expt'     element={<ExptPage />}  />
-          <Route path='/play'     element={<PlayPage />}  />
-          <Route path='/grafana'  element={<GrafanaPage />}  />
           <Route path='/mqtt'     element={<MqttPage />}  />
           <Route path='/admin'    element={<AdminPage />} />
           <Route path='/doe'      element={<DoePage />}   />
+          <Route path='/grafana'  element={<GrafanaPage />}  />
+          <Route path='/play'     element={<PlayPage />}  />
         </Routes>
       </main>
       <Footer />

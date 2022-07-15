@@ -217,6 +217,7 @@ void wifiInit() {
   Serial.println((String)"\n   localIP: " + wifiIP);
 
   randomSeed(micros());  // Why?
+  WiFi.setSleepMode(WIFI_NONE_SLEEP);
   wifiIP = WiFi.localIP().toString();
   Serial.println((String)"\n   localIP: " + wifiIP);
 }
